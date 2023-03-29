@@ -4,7 +4,7 @@ def call(String imagename) {
 			script {
 				if (params.ecr_action == 'create') {
 					// docker.build('buggy-app')
-					sh 'docker build -t ${imagename} .'
+					sh 'docker build -t $imagename .'
 				}
 			}
 		}
