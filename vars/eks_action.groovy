@@ -1,9 +1,9 @@
-def call(Map config = [:]) {
+def call() {
     if (params.eksctl_action == 'create' && params.ecr_action == 'create') {
-		sh 'eksctl create cluster --name ${config.clustername} --region ${config.region} --zones ${config.region}a,${config.region}b --nodegroup-name ${config.nodegroupname} --nodes ${config.nodes} --instance-types ${config.instancetype} --tags "app=${config.tag}" --version ${config.kubernetesversion}'
+		sh 'eksctl create cluster --name devsecops-buggy-app --region us-east-1 --zones us-east-1a,us-east-1b --nodegroup-name linux-buggy-app --nodes 2 --instance-types t2.micro --tags "app=buggy-app" --version 1.25'
 	} else {
 		// deleting the cluster directly created a race condition btwn node groups and cluster, decided to do it in two steps
-		sh 'eksctl delete nodegroup --name linux-buggy-app --cluster ${config.clustername} --region ${config.region}'
-		sh 'eksctl delete cluster --name ${config.clustername} --region ${config.region} --force'
+		sh 'eksctl delete nodegroup --name linux-buggy-app --cluster devsecops-buggy-app --region us-east-1'
+		sh 'eksctl delete cluster --name devsecops-buggy-app --region us-east-1 --force'
 	}
 }

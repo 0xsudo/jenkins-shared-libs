@@ -1,9 +1,9 @@
-def call(Map config = [:]) {
+def call() {
     retry(count: 3) {
 		if (params.eksctl_action == 'create' && params.ecr_action == 'create') {
             sh 'chmod a+x ../namespace_test.sh'
 			sh '../namespace_test.sh'
-			sh 'kubectl apply -f deployment.yaml --namespace ${config.namespace}'
+			sh 'kubectl apply -f deployment.yaml --namespace devsecops'
 		}
 	}
     // alternatively
