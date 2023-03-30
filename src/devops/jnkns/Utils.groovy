@@ -1,4 +1,4 @@
-package src.devops.jnkns
+package devops.jnkns
 
 class Utils {
     static Map parseParams(def context, Map params = [:]) {

@@ -1,4 +1,4 @@
-import src.devops.jnkns.Utils
+import devops.jnkns.Utils
 
 def call(Map params = [:]) {
     params = Utils.parseParams(this, params)
