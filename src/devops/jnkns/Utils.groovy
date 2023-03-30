@@ -1,6 +1,6 @@
-package devops.jnkns
+package src.devops.jnkns
 
-class Utils{
+class Utils {
     static Map parseParams(def context, Map params = [:]) {
         context.request.parameterNames.each { paramName ->
             params[paramName] = context.request.getParameter(paramName)
