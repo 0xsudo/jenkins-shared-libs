@@ -1,9 +1,12 @@
 import devops.jnkns.Utils
 
-def call(Map params = [:]) {
+def call(def context, Map params = [:]) {
     retry(count: 3) {
-		params = Utils.parseParams(this, params)
-		
+		context.request.parameterNames.each { paramName ->
+        	params[paramName] = context.request.getParameter(paramName)
+    	}
+    	return params
+
 		withDockerRegistry([credentialsId: 'docker-login', url: '']) {
 			script {
 				if (params.ecr_action == 'create') {
